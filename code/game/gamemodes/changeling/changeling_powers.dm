@@ -1,3 +1,5 @@
+//#define CP_DEBUG
+
 //Restores our verbs. It will only restore verbs allowed during lesser (monkey) form if we are not human
 /mob/proc/make_changeling()
 	if(!mind)				return
@@ -400,6 +402,7 @@
 
 
 //Fake our own death and fully heal. You will appear to be dead but regenerate fully after a short delay.
+#ifdef CP_DEBUG
 /mob/verb/check_mob_list()
 	set name = "(Mobs) Check Mob List"
 	set category = "Debug"
@@ -419,6 +422,7 @@
 		if(M == src)
 			yes = 1
 	usr << "[yes ? "\blue" : "\red"] You are [yes ? "" : "not "]in the living mob list"
+#endif
 
 /mob/proc/changeling_returntolife()
 	set category = "Changeling"
@@ -901,3 +905,7 @@ var/list/datum/dna/hivemind_bank = list()
 
 	feedback_add_details("changeling_powers","ED")
 	return 1
+
+#ifdef CP_DEBUG
+#undef CP_DEBUG
+#endif

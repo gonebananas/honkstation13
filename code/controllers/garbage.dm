@@ -6,6 +6,7 @@
 var/list/gc_hard_del_types = new
 var/datum/garbage_collector/garbageCollector
 
+#ifdef GC_DEBUG
 /client/verb/gc_dump_hdl()
 	set name = "(GC) Hard Del List"
 	set desc = "List types that are hard del()'d by the GC."
@@ -13,6 +14,7 @@ var/datum/garbage_collector/garbageCollector
 
 	for(var/A in gc_hard_del_types)
 		usr << "[A] = [gc_hard_del_types[A]]"
+#endif
 
 /datum/garbage_collector
 	var/list/queue = new
@@ -73,10 +75,6 @@ var/datum/garbage_collector/garbageCollector
 		queue.Cut(1, 2)
 		dels_count++
 
-#ifdef GC_DEBUG
-#undef GC_DEBUG
-#endif
-
 #undef GC_FORCE_DEL_PER_TICK
 #undef GC_COLLECTION_TIMEOUT
 #undef GC_COLLECTIONS_PER_TICK
@@ -129,3 +127,7 @@ var/datum/garbage_collector/garbageCollector
 	world << "<b>GC: qdel turned [garbageCollector.del_everything ? "off" : "on"].</b>"
 	log_admin("[key_name(usr)] turned qdel [garbageCollector.del_everything ? "off" : "on"].")
 	message_admins("\blue [key_name(usr)] turned qdel [garbageCollector.del_everything ? "off" : "on"].", 1)
+
+#ifdef GC_DEBUG
+#undef GC_DEBUG
+#endif

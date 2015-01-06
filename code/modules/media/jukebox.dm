@@ -430,7 +430,7 @@ var/global/loopModeNames=list(
 	return attack_hand(usr)
 
 /obj/machinery/media/jukebox/process()
-	if(!playlist)
+	if(!playlist && config.media_base_url)
 		var/url="[config.media_base_url]/index.php?playlist=[playlist_id]"
 		testing("[src] - Updating playlist from [url]...")
 
@@ -566,7 +566,7 @@ var/global/loopModeNames=list(
 		"emagged" = "Syndie Mix",
 		"shuttle" = "Shuttle",
 		//"keygen" = "Keygen", // ONLY UNCOMMENT AFTER POMF REDUCES PLAYLIST SIZE OR YOU WILL CRASH THE ENTIRE GODDAMN SERVER.
-		
+
 		"endgame" = "Apocalypse",
 		"clockwork" = "Clockwork", // Unfinished new cult stuff
 		"thunderdome" = "Thunderdome", // For thunderdome I guess
