@@ -42,6 +42,7 @@
 	make_datum_references_lists()	//initialises global lists for referencing frequently used datums (so that we only ever do it once)
 
 	load_configuration()
+	DB.init()
 	load_mode()
 	load_motd()
 	load_admins()
@@ -98,8 +99,6 @@
 	slmaster.mouse_opacity = 0
 
 	src.update_status()
-
-	sleep_offline = 1
 
 	send2mainirc("Server starting up on [config.server? "byond://[config.server]" : "byond://[world.address]:[world.port]"]")
 

@@ -1,0 +1,68 @@
+<changesets logicalFilePath="modules/client/changeset.xml">
+	<changeset id="1" author="sirlazarus">
+		<sql>
+			CREATE TABLE players ( 
+				ID                  INTEGER PRIMARY KEY,
+				player_ckey         VARCHAR(30)    NOT NULL,
+				player_slot         INTEGER NOT NULL,
+				ooc_notes           TEXT,
+				real_name           TEXT,
+				random_name         INTEGER,
+				gender              TEXT,
+				age                 INTEGER,
+				species             TEXT,
+				language            TEXT,
+				flavor_text         TEXT,
+				med_record          TEXT,
+				sec_record          TEXT,
+				gen_record          TEXT,
+				player_alt_titles   TEXT,
+				be_special          TEXT,
+				disabilities        INTEGER,
+				nanotrasen_relation TEXT,
+				UNIQUE ( player_ckey, player_slot ) 
+			);
+
+			CREATE TABLE body ( 
+				ID                INTEGER PRIMARY KEY,
+				player_ckey       VARCHAR(30)    NOT NULL,
+				player_slot       INTEGER NOT NULL,
+				hair_red          INTEGER,
+				hair_green        INTEGER,
+				hair_blue         INTEGER,
+				facial_red        INTEGER,
+				facial_green      INTEGER,
+				facial_blue       INTEGER,
+				skin_tone         INTEGER,
+				hair_style_name   TEXT,
+				facial_style_name TEXT,
+				eyes_red          INTEGER,
+				eyes_green        INTEGER,
+				eyes_blue         INTEGER,
+				underwear         INTEGER,
+				backbag           INTEGER,
+				b_type            TEXT,
+				FOREIGN KEY ( player_ckey, player_slot ) REFERENCES players ( player_ckey, player_slot ) ON DELETE CASCADE,
+				UNIQUE ( player_ckey, player_slot ) 
+			);
+
+			CREATE TABLE jobs ( 
+				ID                INTEGER PRIMARY KEY,
+				player_ckey       VARCHAR(30)    NOT NULL,
+				player_slot       INTEGER NOT NULL,
+				alternate_option  INTEGER,
+				job_civilian_high INTEGER,
+				job_civilian_med  INTEGER,
+				job_civilian_low  INTEGER,
+				job_medsci_high   INTEGER,
+				job_medsci_med    INTEGER,
+				job_medsci_low    INTEGER,
+				job_engsec_high   INTEGER,
+				job_engsec_med    INTEGER,
+				job_engsec_low    INTEGER,
+				FOREIGN KEY ( player_ckey, player_slot ) REFERENCES players ( player_ckey, player_slot ) ON DELETE CASCADE,
+				UNIQUE ( player_ckey, player_slot ) 
+			);
+		</sql>
+	</changeset>
+</changesets>
